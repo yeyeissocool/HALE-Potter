@@ -45,6 +45,18 @@ pnpm-debug.log*
 # Claude Code local config
 .claude/
 
+# Project auxiliary files (not required for runtime)
+cols.txt
+countries_2023.txt
+full_paper_utf8.txt
+healthy_mismatch.txt
+layouts.txt
+outline_ch7.txt
+stats_2023.txt
+us_india_report_extracted.txt
+ppt_charts/
+和鲸平台数据文件/
+
 # Environment variables
 .env
 .env.local
