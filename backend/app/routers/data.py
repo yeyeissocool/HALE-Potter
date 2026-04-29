@@ -12,6 +12,7 @@ async def get_countries(
     sort_by: str = Query("HALE_Percentile", description="Column to sort by"),
     order: str = Query("desc", description="asc or desc"),
     limit: int = Query(50, ge=1, le=500),
+    page: int = Query(1, ge=1),
     search: str = Query("", description="Filter by country name or ISO"),
 ):
     df = pd.read_csv(CSV_PATH)
@@ -24,8 +25,10 @@ async def get_countries(
     if sort_by in df.columns:
         ascending = order.lower() == "asc"
         df = df.sort_values(by=sort_by, ascending=ascending)
-    df = df.head(limit)
+    total = len(df)
+    start = (page - 1) * limit
+    df = df.iloc[start : start + limit]
     return {
-        "total": len(df),
+        "total": total,
         "countries": df.fillna("").to_dict(orient="records"),
     }
